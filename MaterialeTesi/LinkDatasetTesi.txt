@@ -1,0 +1,3 @@
+https://www.kaggle.com/code/supratimhaldar/deepartist-identify-artist-from-art
+
+https://www.kaggle.com/datasets/ikarus777/best-artworks-of-all-time
