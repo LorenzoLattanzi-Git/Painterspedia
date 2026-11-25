@@ -194,7 +194,7 @@ Batch size: 16
 Some files exceed GitHub's 100 MB repository limit, so they are attached to the [v1.0 release](https://github.com/LorenzoLattanzi-Git/Painterspedia/releases/tag/v1.0):
 
 - [app-debug.apk](https://github.com/LorenzoLattanzi-Git/Painterspedia/releases/download/v1.0/app-debug.apk) → install it on an Android 11+ device to try the app, or place it in:  
-  `ApplicazioneAndroid/ProgettoTesiFinito/provaclasslite/app/build/intermediates/apk/debug/`
+  `ApplicazioneAndroid/Painterspedia/provaclasslite/app/build/intermediates/apk/debug/`
 
 - [model_resnet50_deep_artist_identification.h5](https://github.com/LorenzoLattanzi-Git/Painterspedia/releases/download/v1.0/model_resnet50_deep_artist_identification.h5) → place in:  
   `Code/Modello/modelliresnet50/`
