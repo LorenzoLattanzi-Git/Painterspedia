@@ -11,6 +11,7 @@ Painterspedia uses a ResNet50 deep learning model fine-tuned for
 artist identification and converted to TensorFlow Lite to classify
 paintings among 10 famous artists directly on the Android device,
 without any internet connection required for inference.
+The project covers the whole pipeline: training the model in Python (Keras/TensorFlow) and building the Android app from scratch in Java.
 
 ## How It Works
 
@@ -68,7 +69,7 @@ Adam optimizer with learning rate 0.0001.
 | Metric | Training set | Validation set |
 |--------|-------------|----------------|
 | Accuracy | 99.75% | 86.51% - 87.00% |
-| Loss | 6.76% | 48.76% - 48.89% |
+| Loss | 0.068 | 0.488 - 0.489 |
 
 ![Training and validation accuracy](MaterialeTesi/ImgTesi/ImgResult/trainvallossaccuracy.png)
 
@@ -90,9 +91,7 @@ Per-class results on the validation set (800 images):
 
 ![Confusion matrix](MaterialeTesi/ImgTesi/ImgResult/confusionmatrix.png)
 
-The model shows strong training performance while maintaining
-good generalization on the validation set despite the limited
-dataset size.
+The gap between training (99.75%) and validation (~87%) accuracy shows some overfitting, expected with about 4,000 images; results remain good across all 10 artists (F1 from 0.79 to 0.95).
 
 ## Technical Stack
 
@@ -121,8 +120,14 @@ Custom head added on top:
 
 Training was performed in two phases. In the first phase all
 layers were trained for 10 epochs. In the second phase all layers
-were frozen except the first 50, which continued training for up
-to 30 epochs with early stopping on validation loss.
+were frozen except the first 50 layers of the model (the input and
+the early ResNet50 blocks), which continued training for up to
+30 epochs with early stopping on validation loss (patience 20) and
+learning-rate reduction on plateau (factor 0.1, patience 5).
+
+Other pretrained architectures were also tested, including Inception
+and MobileNet. MobileNet was lighter but less accurate; ResNet50 gave
+the best accuracy while still fitting the app's limits.
 
 ## App Architecture
 
@@ -184,7 +189,8 @@ resulting in 10 classes.
 Batch size: 16
 
 
-## Large Files
+## Downloads
+
 Some files exceed GitHub's 100 MB limit and are therefore hosted externally.  
 Please download them from the links below and place them in the indicated directories:
 
@@ -193,3 +199,8 @@ Please download them from the links below and place them in the indicated direct
 
 - [model_resnet50_deep_artist_identification.h5](https://drive.google.com/uc?export=download&id=1iwZV_xIRwnrTQheRlEecflQ20G0Mkv--) → place in:  
   `Code/Modello/modelliresnet50/`
+
+
+## Credits
+
+The model training notebook was adapted from "Painter Identification using Deep Learning" on Kaggle (https://www.kaggle.com/code/kousikgvs/painter-identification-from-deep-learning). I compared several architectures, changed the artist selection and the data augmentation, and built the TFLite conversion and the Android app from scratch. Dataset: Best Artworks of All Time (Kaggle, CC BY-NC-SA 4.0).
