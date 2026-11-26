@@ -2,7 +2,7 @@
 
 ![Painterspedia home screen](MaterialeTesi/ImgTesi/ImgApp/homepage.png)
 
-Android application for painting classification based on the artist,
+Prototype Android application for painting classification based on the artist,
 developed as a Bachelor's thesis project.
 
 ## About
